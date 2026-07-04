@@ -24,6 +24,9 @@ export class ProblemsService {
   ) {}
 
   async create(description: string): Promise<Problem> {
+    if (!description || !description.trim()) {
+      throw new BadRequestException('Problem description is required');
+    }
     return this.problemModel.create({
       description,
       status: 'PENDING',
@@ -75,14 +78,12 @@ export class ProblemsService {
       throw new BadRequestException('Formulate contradiction first before generating TRIZ solutions');
     }
 
-    // Call MCP server to look up inventive principles in the contradiction matrix
-    const matrixPrinciples = await this.mcpClient.browseContradictionMatrix(
+    // Call Agent to generate concrete solutions by looking up parameters
+    const candidates = await this.llmService.generateTrizSolutions(
+      problem.description,
       problem.contradiction.improvingParamCode,
       problem.contradiction.worseningParamCode
     );
-
-    // Call Agent to generate concrete solutions based on the matrix principles
-    const candidates = await this.llmService.generateTrizSolutions(problem.description, [matrixPrinciples]);
 
     // Remove old TRIZ solutions if any
     await this.solutionModel.destroy({ where: { problemId, method: 'triz' } });
@@ -161,6 +162,9 @@ export class ProblemsService {
   }
 
   async fiveWhysAnswer(problemId: string, answer: string, kind?: string, confirmed?: boolean): Promise<FiveWhysStep> {
+    if (!answer || !answer.trim()) {
+      throw new BadRequestException('Answer text is required');
+    }
     const problem = await this.findOne(problemId);
     const steps = problem.fiveWhysSteps || [];
 

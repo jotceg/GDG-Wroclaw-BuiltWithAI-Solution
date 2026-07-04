@@ -8,14 +8,16 @@ async def agent_contradiction(problem: str) -> dict:
     """
     return await agents.run_contradiction_agent(problem)
 
-async def agent_triz_solutions(problem: str, principles: list[str]) -> dict:
-    """Generate candidate solutions for a problem based on TRIZ Inventive Principles using a Google Antigravity Agent.
+async def agent_triz_solutions(problem: str, improving_code: int, worsening_code: int) -> dict:
+    """Generate candidate solutions for a problem based on TRIZ Inventive Principles.
+    The agent automatically looks up the contradiction matrix to discover principles.
     
     Args:
         problem: The inventive problem description.
-        principles: List of TRIZ Inventive Principle names/descriptions to apply.
+        improving_code: The numeric ID (1-39) of the parameter to improve.
+        worsening_code: The numeric ID (1-39) of the parameter that worsens.
     """
-    return await agents.run_triz_solutions_agent(problem, principles)
+    return await agents.run_triz_solutions_agent(problem, improving_code, worsening_code)
 
 async def agent_five_whys_next(problem: str, history: list[dict]) -> dict:
     """Facilitate a 5 Whys interactive question/answer session using a Google Antigravity Agent.

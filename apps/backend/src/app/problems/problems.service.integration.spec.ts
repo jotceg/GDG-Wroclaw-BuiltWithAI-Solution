@@ -8,6 +8,12 @@ import { Problem, Contradiction, Solution, Evaluation, Selection, User, FiveWhys
 import { Transaction } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 
+// Isolate every integration run in a throwaway Postgres schema so sync()/destroy()
+// never touch the shared `buildwithai` dev data. A UNIQUE schema per spec file is
+// required because Jest runs test files in parallel workers — a shared schema would
+// race (one file dropping it while another uses it).
+const TEST_SCHEMA = process.env.DB_TEST_SCHEMA_PIPELINE || 'backend_it_pipeline';
+
 describe('ProblemsService (Integration)', () => {
   let service: ProblemsService;
   let sequelize: Sequelize;
@@ -37,6 +43,7 @@ describe('ProblemsService (Integration)', () => {
           password: process.env.DB_PASSWORD,
           database: process.env.DB_NAME,
           models: [Problem, Contradiction, Solution, Evaluation, Selection, User, FiveWhysStep],
+          define: { schema: TEST_SCHEMA }, // all models live in the isolated schema
           logging: false,
         }),
         SequelizeModule.forFeature([Problem, Contradiction, Solution, Evaluation, Selection, User, FiveWhysStep]),
@@ -50,10 +57,24 @@ describe('ProblemsService (Integration)', () => {
 
     service = module.get<ProblemsService>(ProblemsService);
     sequelize = module.get<Sequelize>(Sequelize);
+
+    // Fail loudly (not silently) if the DB is unreachable — this suite REQUIRES Postgres.
+    try {
+      await sequelize.authenticate();
+    } catch (err: any) {
+      throw new Error(
+        `Integration DB unreachable at ${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}. ` +
+          `Start Postgres before running \`nx test-integration backend\`. Cause: ${err.message}`
+      );
+    }
+
+    // Fresh isolated schema, then create tables inside it.
+    await sequelize.createSchema(TEST_SCHEMA, {}).catch(() => undefined);
     await sequelize.sync({ alter: true });
   });
 
   afterAll(async () => {
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${TEST_SCHEMA}" CASCADE`);
     await sequelize.close();
   });
 
@@ -104,7 +125,6 @@ describe('ProblemsService (Integration)', () => {
     expect(updatedProb1.contradiction).toBeDefined();
 
     // 3. TRIZ Solutions
-    mockMcpClientService.browseContradictionMatrix.mockResolvedValue('Inventive Principles');
     mockLlmService.generateTrizSolutions.mockResolvedValue([
       { title: 'TRIZ Sol 1', description: 'Desc 1', principleCode: '10', principleName: 'Prior Action' },
       { title: 'TRIZ Sol 2', description: 'Desc 2', principleCode: '32', principleName: 'Color change' },

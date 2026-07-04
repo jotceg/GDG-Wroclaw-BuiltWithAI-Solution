@@ -8,6 +8,7 @@
 ## 1. Who we are
 
 Team **Kakapos**, 3 people, finals of GDG Wrocław "Build with AI" hackathon (10h, one day):
+
 - **Oleh** - PM / business / design / pitch. Does NOT write code. Owns scope, Claude Design prototypes, process, submission, pitch.
 - **Kuba** - frontend (Angular via agentic coding; game-dev background).
 - **Denys** - backend (NestJS; 15+ yrs C++ senior). Owns deployment, LLM integration, technical quality.
@@ -17,6 +18,7 @@ Details, strengths, risks, pillar mapping: `team_profile.md`.
 ## 2. The task (summary - full decode in `01_task.md`)
 
 Build a system for an R&D department (jury = client/investor) that:
+
 1. Takes an inventive problem → reformulates it as a **technical contradiction**
 2. Generates **≥3 candidate solutions via TRIZ** (contradiction matrix) + **≥3 via a second method**
 3. **Evaluates all candidates** against the original problem, **selects one**
@@ -65,6 +67,7 @@ If you (the agent) disagree with a priority call in context, say so briefly and 
 ## 6. Task list
 
 **Sequential (blocking, in order):**
+
 1. Scope cut + problem statement + BPMN in Camunda
 2. Nx workspace scaffold: Angular app + NestJS app + repo conventions
 3. Pipeline steps 1-2 working end-to-end (analyze → contradiction)
@@ -73,6 +76,7 @@ If you (the agent) disagree with a priority call in context, say so briefly and 
 6. Submission form + confirmation with facilitator
 
 **Parallel (non-blocking, run alongside):**
+
 - UI screens in Claude Design → Angular components with `--mat-sys-*` tokens
 - pytriz MCP server setup + LLM prompts per step
 - Day 4 evaluation report: scenarios defined early, metrics collected during the day
@@ -99,6 +103,7 @@ The team will keep refining decisions during the sprint (e.g. locking the second
 - If a change would create a contradiction you cannot fully resolve, flag it explicitly instead of leaving stale content.
 
 Cross-file impact map (change on the left → update the files on the right):
+
 - Problem choice → `01_task.md`, `03_problem_selection.md`, `04_architecture.md`, `06_pitch.md`, `08_triz_primer.md`
 - Second method (beside TRIZ) → `03_problem_selection.md`, `04_architecture.md`, `06_pitch.md`, `08_triz_primer.md`
 - Stack / architecture → `04_architecture.md`, `09_stack.md`, `05_schedule.md`, this file
@@ -125,3 +130,27 @@ All docs are in English. Keep them in English.
 - `a11y_AA_checklist.md` - WCAG 2.1/2.2 AA checklist by POUR, with owners
 - `team_profile.md` - team strengths, risks, pillar mapping
 - `scoring_criteria.md` - organizers' 5-pillar criteria (English)
+
+<!-- nx configuration start-->
+<!-- Leave the start & end comments to automatically receive updates. -->
+
+## General Guidelines for working with Nx
+
+- For navigating/exploring the workspace, invoke the `nx-workspace` skill first - it has patterns for querying projects, targets, and dependencies
+- When running tasks (for example build, lint, test, e2e, etc.), always prefer running the task through `nx` (i.e. `nx run`, `nx run-many`, `nx affected`) instead of using the underlying tooling directly
+- Prefix nx commands with the workspace's package manager (e.g., `pnpm nx build`, `npm exec nx test`) - avoids using globally installed CLI
+- You have access to the Nx MCP server and its tools, use them to help the user
+- For Nx plugin best practices, check `node_modules/@nx/<plugin>/PLUGIN.md`. Not all plugins have this file - proceed without it if unavailable.
+- NEVER guess CLI flags - always check nx_docs or `--help` first when unsure
+
+## Scaffolding & Generators
+
+- For scaffolding tasks (creating apps, libs, project structure, setup), ALWAYS invoke the `nx-generate` skill FIRST before exploring or calling MCP tools
+
+## When to use nx_docs
+
+- USE for: advanced config options, unfamiliar flags, migration guides, plugin configuration, edge cases
+- DON'T USE for: basic generator syntax (`nx g @nx/react:app`), standard commands, things you already know
+- The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
+
+<!-- nx configuration end-->

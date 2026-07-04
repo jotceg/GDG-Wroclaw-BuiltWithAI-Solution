@@ -80,6 +80,14 @@
       "options": {
         "passWithNoTests": true
       }
+    },
+    "test-integration": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/backend/jest.integration.config.cts",
+        "passWithNoTests": false,
+        "runInBand": true
+      }
     }
   }
 }

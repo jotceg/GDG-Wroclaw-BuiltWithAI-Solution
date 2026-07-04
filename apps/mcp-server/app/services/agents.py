@@ -3,7 +3,7 @@ import logging
 from typing import List, Optional
 from pydantic import BaseModel, Field
 from google.antigravity import Agent, LocalAgentConfig
-from app.tools.contradictions import search_parameter, get_parameter_by_id
+from app.tools.contradictions import search_parameter, get_parameter_by_id, browse_contradiction_matrix, get_principle_by_id
 
 logger = logging.getLogger(__name__)
 
@@ -81,23 +81,30 @@ async def run_contradiction_agent(problem: str) -> dict:
         result = await response.structured_output()
         return result
 
-async def run_triz_solutions_agent(problem: str, principles: List[str]) -> dict:
-    """Uses a TrizSolutionAgent to generate concrete solutions based on principles."""
-    principles_str = ", ".join(principles)
+async def run_triz_solutions_agent(problem: str, improving_code: int, worsening_code: int) -> dict:
+    """Uses a TrizSolutionAgent to call pytriz matrix tools and generate concrete solutions."""
     system_instructions = (
         "You are an inventive design engineer. Your task is to generate at least 3 candidate solutions for "
-        "the given problem, based strictly on the provided TRIZ Inventive Principles. "
-        "Make the solutions concrete, detailed, and relevant to the specific problem domain. "
+        "the given problem. First, you must call browse_contradiction_matrix to look up the recommended "
+        "Inventive Principles based on the improving and worsening parameter codes. "
+        "Then, retrieve details for those principles if necessary using get_principle_by_id. "
+        "Finally, use those principles to generate concrete, detailed candidate solutions. "
         "Format the output matching the TrizSolutions schema exactly."
     )
     
     config = LocalAgentConfig(
         system_instructions=system_instructions,
+        tools=[browse_contradiction_matrix, get_principle_by_id],
         response_schema=TrizSolutions,
     )
     
     async with Agent(config) as agent:
-        response = await agent.chat(f"Problem: {problem}\nTRIZ Principles to apply: {principles_str}")
+        prompt = (
+            f"Problem: {problem}\n"
+            f"Improving Parameter Code: {improving_code}\n"
+            f"Worsening Parameter Code: {worsening_code}"
+        )
+        response = await agent.chat(prompt)
         result = await response.structured_output()
         return result
 
@@ -190,7 +197,7 @@ async def run_evaluate_agent(problem: str, solutions: List[dict]) -> dict:
 
 async def run_select_agent(problem: str, evaluations: List[dict]) -> dict:
     """Uses a SelectionAgent to choose the best solution and justify the choice."""
-    evals_str = json.dumps(evals, indent=2)
+    evals_str = json.dumps(evaluations, indent=2)
     system_instructions = (
         "You are an R&D director making the final design choice. Your task is to select the single best solution "
         "candidate based on the evaluations. You must provide a comprehensive, logical justification for the selection "

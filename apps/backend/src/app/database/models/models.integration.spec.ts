@@ -9,6 +9,12 @@ import { Selection } from './selection.model';
 import { User } from './user.model';
 import { FiveWhysStep } from './five-whys-step.model';
 
+// Isolate every integration run in a throwaway Postgres schema so sync()/destroy()
+// never touch the shared `buildwithai` dev data. A UNIQUE schema per spec file is
+// required because Jest runs test files in parallel workers — a shared schema would
+// race (one file dropping it while another uses it).
+const TEST_SCHEMA = process.env.DB_TEST_SCHEMA_MODELS || 'backend_it_models';
+
 describe('Database Models Integration', () => {
   let sequelize: Sequelize;
   let transaction: Transaction;
@@ -23,14 +29,28 @@ describe('Database Models Integration', () => {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       models: [Problem, Contradiction, Solution, Evaluation, Selection, User, FiveWhysStep],
+      define: { schema: TEST_SCHEMA }, // all models live in the isolated schema
       logging: false, // Suppress logs during test runs
     });
 
-    // Sync database (altering existing tables to add columns if necessary)
+    // Fail loudly (not silently) if the DB is unreachable — these tests REQUIRE Postgres.
+    try {
+      await sequelize.authenticate();
+    } catch (err: any) {
+      throw new Error(
+        `Integration DB unreachable at ${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}. ` +
+          `Start Postgres before running \`nx test-integration backend\`. Cause: ${err.message}`
+      );
+    }
+
+    // Fresh isolated schema, then create tables inside it.
+    await sequelize.createSchema(TEST_SCHEMA, {}).catch(() => undefined);
     await sequelize.sync({ alter: true });
   });
 
   afterAll(async () => {
+    // Drop the throwaway schema and everything in it, then close.
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${TEST_SCHEMA}" CASCADE`);
     await sequelize.close();
   });
 

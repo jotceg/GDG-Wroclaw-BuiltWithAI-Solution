@@ -4,11 +4,11 @@ import { ProblemsController } from './problems.controller';
 import { ProblemsService } from './problems.service';
 import { LlmService } from './llm.service';
 import { McpClientService } from './mcp-client.service';
-import { Problem, Contradiction, Solution, Evaluation, Selection, FiveWhysStep } from '../database/models';
+import { Problem, Contradiction, Solution, Evaluation, Selection, FiveWhysStep, User } from '../database/models';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([Problem, Contradiction, Solution, Evaluation, Selection, FiveWhysStep]),
+    SequelizeModule.forFeature([Problem, Contradiction, Solution, Evaluation, Selection, FiveWhysStep, User]),
   ],
   controllers: [ProblemsController],
   providers: [ProblemsService, LlmService, McpClientService],
