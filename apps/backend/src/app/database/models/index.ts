@@ -4,3 +4,4 @@ export * from './solution.model';
 export * from './evaluation.model';
 export * from './selection.model';
 export * from './user.model';
+export * from './five-whys-step.model';

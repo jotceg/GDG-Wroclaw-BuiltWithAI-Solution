@@ -35,9 +35,9 @@ export class Solution extends Model<Solution> {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
-  principleName!: string;
+  principleName?: string;
 
   @Column({
     type: DataType.STRING,

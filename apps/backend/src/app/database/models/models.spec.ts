@@ -7,6 +7,7 @@ import { Solution } from './solution.model';
 import { Evaluation } from './evaluation.model';
 import { Selection } from './selection.model';
 import { User } from './user.model';
+import { FiveWhysStep } from './five-whys-step.model';
 
 describe('Database Models Integration', () => {
   let sequelize: Sequelize;
@@ -21,7 +22,7 @@ describe('Database Models Integration', () => {
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      models: [Problem, Contradiction, Solution, Evaluation, Selection, User],
+      models: [Problem, Contradiction, Solution, Evaluation, Selection, User, FiveWhysStep],
       logging: false, // Suppress logs during test runs
     });
 
@@ -230,5 +231,53 @@ describe('Database Models Integration', () => {
     expect(retrievedUser!.problems).toHaveLength(1);
     expect(retrievedUser!.problems![0].id).toBe(problem.id);
     expect(retrievedUser!.problems![0].description).toBe('Problem owned by test user');
+  });
+
+  it('should establish a 1:N relationship with FiveWhysStep', async () => {
+    const problem = await Problem.create(
+      {
+        description: 'Problem for 5 Whys process',
+      },
+      { transaction }
+    );
+
+    const step1 = await FiveWhysStep.create(
+      {
+        problemId: problem.id,
+        depth: 1,
+        question: 'Why do buildings get hot in summer?',
+        answer: 'Because of solar radiation through windows.',
+        kind: 'answer',
+        confirmed: true,
+      },
+      { transaction }
+    );
+
+    const step2 = await FiveWhysStep.create(
+      {
+        problemId: problem.id,
+        depth: 2,
+        question: 'Why is there no smart insulation?',
+        kind: 'hypothesis',
+        confirmed: false,
+      },
+      { transaction }
+    );
+
+    expect(step1.id).toBeDefined();
+    expect(step2.id).toBeDefined();
+
+    // Retrieve problem with steps
+    const retrieved = await Problem.findByPk(problem.id, {
+      include: [FiveWhysStep],
+      transaction,
+    });
+
+    expect(retrieved).not.toBeNull();
+    expect(retrieved!.fiveWhysSteps).toHaveLength(2);
+    expect(retrieved!.fiveWhysSteps![0].depth).toBe(1);
+    expect(retrieved!.fiveWhysSteps![0].confirmed).toBe(true);
+    expect(retrieved!.fiveWhysSteps![1].depth).toBe(2);
+    expect(retrieved!.fiveWhysSteps![1].confirmed).toBe(false);
   });
 });
