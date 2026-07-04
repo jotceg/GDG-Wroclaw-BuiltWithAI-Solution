@@ -56,7 +56,7 @@ If you (the agent) disagree with a priority call in context, say so briefly and 
 ## 5. Stack (locked - rationale in `09_stack.md`)
 
 - **Nx monorepo**: `apps/frontend` (Angular 19+, signals, Angular Material 3), `apps/backend` (NestJS)
-- **pytriz MCP server** for the TRIZ contradiction matrix; LLM (with web search tool) per pipeline step
+- **pytriz & Antigravity MCP server** (Python) on port **8123** for the TRIZ contradiction matrix and stateful reasoning agents built with the **Google Antigravity SDK** (`google-antigravity`)
 - **SQL** (Cloud SQL / Postgres via Sequelize) - reasoning trail is persisted, never ephemeral
 - **Claude Design** for UI prototypes (tokens from `design-system.md`); **Camunda Modeler** for the Day 1 BPMN artifact
 - Deployment: Google Cloud Run + Cloud Build CI/CD

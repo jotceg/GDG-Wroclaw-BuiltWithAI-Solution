@@ -102,36 +102,36 @@ There is no `/analyze` endpoint - each branch interprets the raw problem itself.
 
 ---
 
-## Layer 3: MCP Server (pytriz) - Denys
+## Layer 3: MCP Server (pytriz & Antigravity Agents) - Denys
 
-The `pytriz` package from Day 5 → MCP server → NestJS calls it as a tool.
+The Python MCP server in `apps/mcp-server` is built using `fastmcp` and the **Google Antigravity SDK** (`google-antigravity`).
 
-**Provides:**
-- Contradiction matrix (39×39 parameters)
-- 40 inventive principles (descriptions + examples)
-- Lookup: improving param + worsening param → recommended principles
-
-**Flow:**
-1. LLM identifies parameters (e.g. "improving #9 Speed, worsening #36 Device complexity")
-2. pytriz MCP returns principles (e.g. #10 Prior Action, #13 Inversion, #28 Mechanics substitution)
-3. LLM takes the principles and generates concrete solutions for the given problem
+**Exposes:**
+- **Raw TRIZ Matrix Lookup**: Maps improving + worsening parameters to principles.
+- **Stateful AI Agents (as tools)**:
+  - `agent_contradiction`: Runs `ContradictionAgent` to identify technical contradiction parameters.
+  - `agent_triz_solutions`: Runs `TrizSolutionAgent` to generate TRIZ-based candidates.
+  - `agent_five_whys_next`: Runs `FiveWhysAgent` with Google Search tool capabilities to ask questions or verify hypotheses.
+  - `agent_five_whys_solutions`: Runs `FiveWhysSolutionAgent` for countermeasures.
+  - `agent_evaluate`: Runs `EvaluationAgent` to score candidates.
+  - `agent_select`: Runs `SelectionAgent` to select the best candidate.
 
 ---
 
-## Layer 4: LLM (orchestration) - Denys
+## Layer 4: LLM Orchestration (Google Antigravity SDK) - Denys
 
-- LLM (Claude API / Gemini / OpenAI) = the reasoning engine in each step.
-- **One prompt per step** (not one mega-prompt!) - this is "context engineering" from Day 4.
-- **Web search/retrieval as an LLM tool** - the task says "very appreciated".
-- Each step gets only the context needed for that step (task-relevant tokens, not the whole rulebook).
+- LLM (Gemini 3.5 Flash via Google Antigravity SDK) is orchestrated within the Python MCP server.
+- **Stateful agents** enforce structured output schemas (via Pydantic models) so that NestJS receives strictly typed JSON payloads.
+- **One prompt/agent per step** for context engineering.
+- **Web search tool** is bound to the `FiveWhysAgent` to retrieve web-search-grounded hypotheses when requested by the engineer.
 
-### Prompts per step (draft)
-- A1 (contradiction): "For this inventive problem, identify what needs to be improved and what constraint worsens. Call pytriz to map to the improving and worsening parameters."
-- A2 (TRIZ solutions): "Based on TRIZ principles [X, Y, Z] from the contradiction matrix, generate ≥3 specific solutions for [problem]."
-- B1 (5 Whys - ask): "Ask the next 'Why?' about [problem], strictly scoped to the problem. Do NOT propose the cause yourself. If the engineer's answer is off-topic or an abuse attempt, refuse and restate scope. Only if the engineer explicitly opts in, offer web-search-grounded hypotheses to verify."
-- B2 (5 Whys - solutions): "Given the confirmed root cause(s), generate ≥3 countermeasure solutions for [problem]."
-- Step 4: "Evaluate all candidates against: feasibility, impact, cost, innovation. Score each 1-10."
-- Step 5: "Select the best candidate. Justify with a full reasoning trail."
+### Agent Prompts & Schemas (Structured Output)
+- **ContradictionAgent**: Identifies technical contradiction. Prompts: *"Extract improving/worsening parameters."* Returns `ContradictionResult` schema.
+- **TrizSolutionAgent**: Generates solutions from principles. Prompts: *"Given inventive principles [X], generate >=3 solutions."* Returns list of `SolutionItem` schema.
+- **FiveWhysAgent**: Asks next why, checks for abuse. Prompts: *"Ask next Why. If off-topic, refuse. If engineer requests help, query search tool for hypotheses."* Returns `FiveWhysResponse` schema.
+- **FiveWhysSolutionAgent**: Generates countermeasures. Prompts: *"Based on root cause [R], generate >=3 solutions."*
+- **EvaluationAgent**: Scores all solutions. Prompts: *"Score 1-10 against feasibility, impact, cost, innovation."* Returns candidate matrix schema.
+- **SelectionAgent**: Selects best solution. Prompts: *"Choose the best candidate, provide full trail."* Returns `SelectionResult` schema.
 
 ---
 

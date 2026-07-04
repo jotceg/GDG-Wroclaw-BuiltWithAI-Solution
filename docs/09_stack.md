@@ -4,9 +4,9 @@
 
 ---
 
-## Decision: Angular + NestJS + Nx + SQL + pytriz MCP server
+## Decision: Angular + NestJS + Nx + SQL + pytriz MCP Server (with Google Antigravity SDK)
 
-Supporting tools: **Claude Design** (UI prototyping, no Figma company account) and **Camunda Modeler** (Day 1 BPMN artifact).
+Supporting tools: **Google Antigravity SDK** (`google-antigravity` for Python agents), **Claude Design** (UI prototyping, no Figma company account), and **Camunda Modeler** (Day 1 BPMN artifact).
 
 ## Why (closing arguments)
 
@@ -57,7 +57,7 @@ Risk: 15 years of C++ don't translate 1:1 to speed in NestJS. We address it, we 
 ### For Denys (backend):
 - NestJS (modules / controllers / providers / middleware)
 - Nx workspace: `apps/backend`
-- pytriz MCP server (from Day 5 materials)
+- pytriz & Antigravity MCP server (Python project in `apps/mcp-server` using the **Google Antigravity SDK**)
 - Sequelize ORM + Cloud SQL (PostgreSQL)
 - OpenAPI/Swagger auto-documentation
 
