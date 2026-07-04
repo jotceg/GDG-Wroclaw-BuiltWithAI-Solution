@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
-import { WIZARD_ROUTES } from '@gdg-wroclaw-solution/feature-wizard';
+import { VoltApp } from './volt/volt-app';
 
 export const appRoutes: Route[] = [
-  ...WIZARD_ROUTES,
+  { path: '', component: VoltApp },
   { path: '**', redirectTo: '' },
 ];

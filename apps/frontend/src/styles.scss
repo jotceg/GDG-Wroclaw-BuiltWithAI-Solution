@@ -67,24 +67,279 @@ body {
 }
 
 body {
-  background: var(--mat-sys-background);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-large);
-  font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
 }
 
-// Never remove the focus ring — a11y (design-system.md).
-:focus-visible {
-  outline: 2px solid var(--mat-sys-primary);
+// ---------------------------------------------------------------------------
+// VOLT design system — ported 1:1 from docs/design-system prototype
+// (volt-prototype-standalone-2.html). Dark is the base scheme.
+// ---------------------------------------------------------------------------
+:root {
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* DARK is the base scheme */
+  --color-bg: #0c0b12;
+  --color-surface-1: #16141f;
+  --color-surface-2: #1e1b29;
+  --color-surface-3: #282435;
+  --color-on-surface: #eceaf6;
+  --color-on-surface-variant: #aea9c4;
+  --color-primary: #b0a2ff;
+  --color-primary-fill: #6d50ff;
+  --color-on-primary-fill: #ffffff;
+  --color-primary-container: #2c2076;
+  --color-on-primary-container: #e3deff;
+  --color-secondary: #cbe85a;
+  --color-accent-fill: #cbe85a;
+  --color-on-accent: #14140a;
+  --color-secondary-container: #37411a;
+  --color-on-secondary-container: #e4f3a6;
+  --color-success: #4bd07e;
+  --color-warning: #ffc53d;
+  --color-error: #ff7a8a;
+  --color-info: #7fb0ff;
+  --color-warning-fill: #ffc53d;
+  --color-on-warning: #2b1f00;
+  --color-text-disabled: #8b86a3;
+  --color-method2: #9a8de0;
+  --color-method2-dot: #6f65b8;
+  --color-border: #2f2b3e;
+  --color-border-interactive: #6c6784;
+  --color-focus: #b0a2ff;
+  --color-score-1: #ff7a8a;
+  --color-score-2: #ffae5a;
+  --color-score-3: #9ea6c6;
+  --color-score-4: #6edbaa;
+  --color-score-5: #4bd07e;
+  --color-mascot-accent: #b8e86d;
+  --color-mascot-face: #3a3550;
+  --color-sun: #cbe85a;
+  --shadow-1: none;
+  --shadow-2: 0 10px 34px rgba(0, 0, 0, 0.55);
+  --shadow-3: 0 24px 60px rgba(0, 0, 0, 0.6);
+  --glow: 150, 120, 255;
+}
+
+[data-theme='light'] {
+  --color-bg: #f5f4fb;
+  --color-surface-1: #ffffff;
+  --color-surface-2: #f0eef9;
+  --color-surface-3: #e7e4f4;
+  --color-on-surface: #17151f;
+  --color-on-surface-variant: #4b4860;
+  --color-primary: #5b3df5;
+  --color-primary-fill: #5b3df5;
+  --color-on-primary-fill: #ffffff;
+  --color-primary-container: #e4dfff;
+  --color-on-primary-container: #1b0a63;
+  --color-secondary: #5e6b00;
+  --color-accent-fill: #c6ef3c;
+  --color-on-accent: #171500;
+  --color-secondary-container: #e7f5a8;
+  --color-on-secondary-container: #2e3a00;
+  --color-success: #0a6b33;
+  --color-warning: #946200;
+  --color-error: #c11b33;
+  --color-info: #1d5ad1;
+  --color-warning-fill: #ffc53d;
+  --color-on-warning: #3a2a00;
+  --color-text-disabled: #7a7689;
+  --color-method2: #5b3df5;
+  --color-method2-dot: #8b7dd8;
+  --color-border: #d6d2e6;
+  --color-border-interactive: #6e6a82;
+  --color-focus: #5b3df5;
+  --color-score-1: #c11b33;
+  --color-score-2: #b65114;
+  --color-score-3: #4e5670;
+  --color-score-4: #1f7a44;
+  --color-score-5: #0a6b33;
+  --color-mascot-accent: #6dbe2e;
+  --color-mascot-face: #e7e4f4;
+  --color-sun: #bf9600;
+  --shadow-1: 0 1px 3px rgba(20, 18, 40, 0.08);
+  --shadow-2: 0 6px 22px rgba(20, 18, 40, 0.1);
+  --shadow-3: 0 18px 48px rgba(20, 18, 40, 0.16);
+  --glow: 91, 61, 245;
+}
+
+::selection {
+  background: var(--color-primary-fill);
+  color: #fff;
+}
+button,
+select,
+[role='button'] {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+button * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+pre,
+code,
+samp,
+kbd {
+  cursor: text;
+  -webkit-user-select: text;
+  user-select: text;
+}
+[data-theme],
+[data-theme] * {
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease,
+    fill 0.18s ease, stroke 0.18s ease;
+}
+@keyframes volt-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+@keyframes volt-blink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.1);
+  }
+}
+[data-volt] {
+  animation: volt-bob 2.6s ease-in-out infinite;
+  transform-origin: center;
+}
+[data-volt]:hover {
+  animation: volt-bob 1.2s ease-in-out infinite;
+}
+[data-magnetic] {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'><path d='M13 1l2.6 8.4L24 13l-8.4 2.6L13 25l-2.6-9.4L2 13l8.4-3.6z' fill='%23C6EF3C' stroke='%2317151F' stroke-width='1.6'/></svg>")
+      13 13,
+    pointer;
+  will-change: translate;
+}
+button,
+a,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+button,
+a,
+input,
+textarea,
+select,
+[tabindex] {
+  outline: none;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-focus);
   outline-offset: 2px;
+  border-radius: 8px;
 }
-
-// Respect reduced-motion preferences.
+@keyframes praxis-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.14);
+  }
+}
+@keyframes praxis-pulse-strong {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.22);
+  }
+}
+@keyframes praxis-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes praxis-orbit-rev {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@keyframes praxis-shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+@keyframes praxis-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes praxis-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+@keyframes praxis-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+[data-reveal] {
+  animation: praxis-reveal 0.6s cubic-bezier(0.16, 0.8, 0.3, 1) both;
+}
+[data-reveal][data-d='1'] {
+  animation-delay: 0.08s;
+}
+[data-reveal][data-d='2'] {
+  animation-delay: 0.16s;
+}
+[data-reveal][data-d='3'] {
+  animation-delay: 0.24s;
+}
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
