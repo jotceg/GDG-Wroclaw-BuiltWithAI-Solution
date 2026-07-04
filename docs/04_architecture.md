@@ -140,12 +140,13 @@ The `pytriz` package from Day 5 → MCP server → NestJS calls it as a tool.
 **Persistence** - the reasoning trail must live in the database, not be ephemeral LLM output.
 
 ```
-problems          → id, description, status, created_at
-contradictions    → id, problem_id, improving_param, worsening_param, description
-five_whys_steps   → id, problem_id, depth, question, answer, kind (answer/refusal/hypothesis), confirmed
-solutions         → id, problem_id, method (triz/fivewhys), principle_or_rootcause, description, source
-evaluations       → id, solution_id, criterion, score, reasoning
-selections        → id, problem_id, solution_id, justification, full_trail
+users             → id, email, password_hash, name, role, created_at, updated_at
+problems          → id, user_id, description, status, created_at, updated_at
+contradictions    → id, problem_id, improving_param_code, improving_param_name, worsening_param_code, worsening_param_name, explanation, created_at, updated_at
+five_whys_steps   → id, problem_id, depth, question, answer, kind (answer/refusal/hypothesis), confirmed, created_at, updated_at
+solutions         → id, problem_id, method (triz/alt), principle_code, principle_name, title, description, created_at, updated_at
+evaluations       → id, solution_id, criterion, score, reasoning, created_at, updated_at
+selections        → id, problem_id, selected_solution_id, justification, full_trail_json, created_at, updated_at
 ```
 
 > `five_whys_steps` persists the whole 5 Whys Q&A trail (including guardrail refusals and any
