@@ -6,6 +6,7 @@ import { Contradiction } from './contradiction.model';
 import { Solution } from './solution.model';
 import { Evaluation } from './evaluation.model';
 import { Selection } from './selection.model';
+import { User } from './user.model';
 
 describe('Database Models Integration', () => {
   let sequelize: Sequelize;
@@ -20,12 +21,12 @@ describe('Database Models Integration', () => {
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      models: [Problem, Contradiction, Solution, Evaluation, Selection],
+      models: [Problem, Contradiction, Solution, Evaluation, Selection, User],
       logging: false, // Suppress logs during test runs
     });
 
-    // Sync database (tables should already exist, but this ensures a clean state)
-    await sequelize.sync();
+    // Sync database (altering existing tables to add columns if necessary)
+    await sequelize.sync({ alter: true });
   });
 
   afterAll(async () => {
@@ -193,5 +194,41 @@ describe('Database Models Integration', () => {
     expect(retrieved!.selectedSolution.id).toBe(solution.id);
     expect(retrieved!.fullTrailJson).toEqual(fullTrailData);
     expect(retrieved!.fullTrailJson.winner).toBe('Polar Bear Fur Insulation');
+  });
+
+  it('should establish User and associate with Problems', async () => {
+    const user = await User.create(
+      {
+        email: 'test-user@triz-solver.com',
+        passwordHash: '$2b$10$hashedpasswordhere',
+        name: 'John Doe',
+        role: 'client',
+      },
+      { transaction }
+    );
+
+    expect(user.id).toBeDefined();
+    expect(user.email).toBe('test-user@triz-solver.com');
+
+    const problem = await Problem.create(
+      {
+        userId: user.id,
+        description: 'Problem owned by test user',
+      },
+      { transaction }
+    );
+
+    expect(problem.userId).toBe(user.id);
+
+    // Retrieve user and eagerly load problems
+    const retrievedUser = await User.findByPk(user.id, {
+      include: [Problem],
+      transaction,
+    });
+
+    expect(retrievedUser).not.toBeNull();
+    expect(retrievedUser!.problems).toHaveLength(1);
+    expect(retrievedUser!.problems![0].id).toBe(problem.id);
+    expect(retrievedUser!.problems![0].description).toBe('Problem owned by test user');
   });
 });

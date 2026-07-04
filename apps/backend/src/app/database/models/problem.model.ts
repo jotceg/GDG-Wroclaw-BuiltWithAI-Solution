@@ -1,7 +1,8 @@
-import { Column, DataType, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 import { Contradiction } from './contradiction.model';
 import { Solution } from './solution.model';
 import { Selection } from './selection.model';
+import { User } from './user.model';
 
 @Table({ tableName: 'problems', underscored: true })
 export class Problem extends Model<Problem> {
@@ -11,6 +12,16 @@ export class Problem extends Model<Problem> {
     primaryKey: true,
   })
   override id!: string;
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.UUID,
+    allowNull: true,
+  })
+  userId?: string;
+
+  @BelongsTo(() => User)
+  user?: User;
 
   @Column({
     type: DataType.TEXT,
