@@ -58,21 +58,28 @@ TRIZ is not "the AI made something up at random". It's a systematic, data-based 
 
 This is exactly "approaching the problem in an unconventional way" from the Innovation criterion.
 
-## The second method - why and which
+## The second method - 5 Whys (LOCKED)
 
-The task requires two methods. TRIZ is mandatory and will be everywhere (14 teams). You differentiate with the second method.
+The task requires two generation methods. TRIZ is mandatory and will be everywhere (14 teams).
+Our second method is **5 Whys** - the classic root-cause analysis technique, turned into a
+generation method: drill from the symptom down to the root cause(s), then generate ≥3
+**countermeasures** that address the root cause. Those countermeasures are the candidate solutions.
 
-### Biomimicry (recommended for Problem 7 / 6 / 3)
-"How did nature solve this problem?"
-- LLM + web search finds biological analogies
-- Pitch gold: "Termites have kept a constant temperature in their mound for millions of years without AC"
-- Strong for Innovation (non-obvious source of solutions)
+### Why 5 Whys pairs well with TRIZ
+- **Different axis of thinking.** TRIZ abstracts the problem into a contradiction and imports
+  solutions from other domains. 5 Whys stays inside the problem and drills causally downward.
+  Engineering (TRIZ) vs investigative (5 Whys) - two genuinely different lenses on the same problem.
+- **Human-in-the-loop.** The engineer answers each "Why?"; the model **facilitates** (asks,
+  presses for evidence) but does NOT invent the answers - that would produce a plausible-but-false
+  causal chain and break both the method and the task's "not a single prompt dressed up" rule.
+- **Guardrails baked in.** Off-topic / abuse (e.g. "what's the weather") is refused. If the
+  engineer is stuck, the model may - only on explicit opt-in - offer web-search-grounded
+  hypotheses "to verify"; the engineer confirms or rejects, and unconfirmed items are marked
+  as assumptions, never facts.
 
-### SCAMPER (universal, recommended for Problem 1 / 4 / 5)
-7 creative operators: Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse.
-- The LLM systematically walks through each operator
-- Fast, explains well in the pitch
-- Contrasts with analytical TRIZ (creative vs engineering)
+> Trade-off to know: 5 Whys is a weaker "wow" hook than a nature/Biomimicry angle. The Innovation
+> story is now the **human + AI root-cause collaboration** and the transparent, guardrailed
+> pipeline, not a termite metaphor.
 
 ## What you do NOT need to know
 
@@ -83,6 +90,6 @@ The task requires two methods. TRIZ is mandatory and will be everywhere (14 team
 
 ## What you must be able to say in the pitch
 
-"Our system uses TRIZ - a methodology based on the analysis of 200 thousand patents. It identifies the technical contradiction in a problem, then systematically searches for solutions that worked on similar contradictions in other fields. We complement it with [Biomimicry/SCAMPER] to have both an engineering and a creative approach. Every step is transparent - the client sees where each recommendation came from."
+"Our system uses TRIZ - a methodology based on the analysis of 200 thousand patents. It identifies the technical contradiction in a problem, then systematically searches for solutions that worked on similar contradictions in other fields. We complement it with a guided 5 Whys analysis - the engineer and the AI drill to the root cause together, and the system turns each root cause into concrete countermeasures. Every step is transparent - the client sees where each recommendation came from."
 
-> When the second method is locked, the agent must update this file's "second method" section together with `01_task.md`, `03_problem_selection.md`, `04_architecture.md`, and `06_pitch.md`.
+> Second method is locked to **5 Whys**. If it changes again, the agent must update this file's "second method" section together with `01_task.md`, `03_problem_selection.md`, `04_architecture.md`, and `06_pitch.md`.

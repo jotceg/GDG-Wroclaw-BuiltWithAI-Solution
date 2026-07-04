@@ -33,16 +33,16 @@ One sentence that makes the jury want to keep listening.
 Show the full trail on a concrete SDG problem (Buildings for the demo):
 1. I type in the problem → the system analyzes it
 2. I see the technical contradiction (param A vs param B)
-3. I see 3 TRIZ solutions (with principle names) + 3 Biomimicry/SCAMPER
+3. I see 3 TRIZ solutions (with principle names) + 3 from a guided 5 Whys root-cause analysis
 4. I see the evaluation matrix (scoring per criterion)
 5. I see the recommendation with a full justification
 
 **Key:** show that each step is inspectable. Click the contradiction - see where it comes from. Click a solution - see which TRIZ principle and why.
 
 ### 3:00-3:45 - HOW IT WORKS (1 architecture slide)
-- 5-step pipeline (diagram)
+- Two parallel generation methods (TRIZ + guided 5 Whys) → merge → evaluate → select (diagram)
 - Angular + NestJS + Nx + pytriz MCP server + LLM + web search
-- "This is not a single prompt dressed up - it is a real pipeline with 7 endpoints and persisted data"
+- "This is not a single prompt dressed up - it is a real pipeline with ~10 endpoints, guardrails and persisted data"
 - Name the workshop technologies (signal that "we applied what you taught")
 
 ### 3:45-4:15 - IMPACT / METRICS (from the Day 4 report)

@@ -1,7 +1,13 @@
 # PROBLEM SELECTION - analysis of 7 options
 
+> **⚠️ SECOND METHOD IS LOCKED to 5 Whys for ALL problems** (root-cause → countermeasures, run in
+> parallel with TRIZ). It is method-agnostic to the problem, so the per-problem "second method"
+> suggestions below (Biomimicry / SCAMPER) are **historical** from the pre-lock analysis and no
+> longer drive the decision. Kept only as a record of the problem-selection reasoning. See
+> `08_triz_primer.md` and `04_architecture.md` for the current method design.
+
 > Kakapos = first pick (of 14 teams). Each problem can be taken by max 2 teams.
-> Decision at 8:00 - Oleh leads. Choosing the problem = simultaneously choosing the second method.
+> Decision at 8:00 - Oleh leads. Problem choice no longer determines the second method (it is 5 Whys).
 > Note: the app must work with ALL 7 problems (generic pipeline), but the demo and pitch focus on Problem 7.
 
 ---
@@ -9,7 +15,7 @@
 ## Selection filter (in priority order)
 
 1. **Do I see a clear innovation twist?** (Innovation = 25 pts, highest weight among outcome criteria)
-2. **Is the MVP feasible in 9h with our stack?** (5-step pipeline + UI + deploy)
+2. **Is the MVP feasible in 9h with our stack?** (parallel two-method pipeline + UI + deploy)
 3. **Can we show a measurable effect?** (Day 4 report: scenarios → metrics)
 4. **Does it sell well in a 5-min pitch?** (understandable, emotional, visual)
 
@@ -79,28 +85,34 @@
 
 ### 1. Problem 7 (Buildings) - PRIMARY / DEMO FOCUS
 - Cleanest TRIZ contradiction (physical - opposite requirements on the same element).
-- Biomimicry as the second method = **pitch gold** ("Termites have been solving this exact problem for millions of years - our system found their strategy").
+- Second method = 5 Whys (locked): the engineer + AI drill "why does the same wall fight us in both seasons?" to a root cause, then generate countermeasures. Innovation story = transparent human+AI root-cause collaboration.
 - Highest innovation potential.
 - Simple to formulate, simple to demo.
 
 ### 2. Problem 4 (Oil spills) - BACKUP #1
 - Best pitch appeal (visual, emotional).
 - Low barrier to entry - contradiction simple to formulate.
-- SCAMPER or Biomimicry as the second method.
+- Second method = 5 Whys (locked), same as all problems.
 
 ### 3. Problem 3 (Electricity) - BACKUP #2
 - Strongest organizer hint (they explicitly rule out the obvious solution).
 - Emotional angle (healthcare, education).
 - Higher MVP risk (technical problem).
 
-## Second-method decision
+## Second-method decision - LOCKED: 5 Whys
 
-| Problem | Recommended method 2 | Why |
+The second method is **5 Whys** for every problem (not chosen per problem). It runs in parallel
+with TRIZ: the engineer answers guided "Why?" questions, the model facilitates (with guardrails
+and an opt-in hypothesis fallback), we drill to root cause(s) and generate ≥3 countermeasures.
+
+The table below is **historical** (pre-lock, when method was chosen per problem) and kept only
+for the record:
+
+| Problem | (historical) method 2 idea | Why |
 |---------|----------------------|-----|
-| 7 (Buildings) | **Biomimicry** | Termites, polar bears, bird moulting - natural analogies |
-| 4 (Oil spills) | SCAMPER or Biomimicry | Marine organisms + SCAMPER on the transport process |
-| 3 (Electricity) | Biomimicry | How nature transports/stores energy |
-| Others | SCAMPER | Universal, fast, contrasts with analytical TRIZ |
+| 7 (Buildings) | ~~Biomimicry~~ → **5 Whys** | superseded; 5 Whys locked |
+| 4 (Oil spills) | ~~SCAMPER / Biomimicry~~ → **5 Whys** | superseded |
+| 3 (Electricity) | ~~Biomimicry~~ → **5 Whys** | superseded |
+| Others | ~~SCAMPER~~ → **5 Whys** | superseded |
 
-**Final decision: on-site at 8:00, after reading the full descriptions.**
-**Once the second method is locked, the agent must update `01_task.md`, `04_architecture.md`, `06_pitch.md`, and `08_triz_primer.md` for consistency.**
+**Design of the 5 Whys method: `08_triz_primer.md` (second method section) and `04_architecture.md`.**

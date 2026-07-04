@@ -15,7 +15,7 @@
 
 - [ ] **Oleh leads the problem choice.** Filter: see `03_problem_selection.md`.
 - [ ] Pitch slot choice: aim for the **3rd-5th** slot (jury warmed up, still fresh).
-- [ ] Decision: problem + second method (TRIZ mandatory, see `03_problem_selection.md`).
+- [ ] Decision: problem only (TRIZ mandatory; second method already locked to **5 Whys** - see `08_triz_primer.md`).
 
 ## 8:15-8:30 - START BUILDING
 

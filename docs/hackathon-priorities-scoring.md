@@ -52,7 +52,7 @@ Sorting logic: point weight × risk of forgetting × time cost.
 |---|------|-----|-------|------|----------|
 | 1 | **Criterion Zero: pipeline works end-to-end** | gate | everyone | all day, checkpoints 11:00/14:00/15:00 | Without it the rest = 0. The system must genuinely process the problem and return sensible solutions |
 | 2 | **Process analysis + MVP scope (Day 1 artifact)** | 20 | Oleh | 8:30-9:30 | Do it first - it's a deliverable AND the tool to lock scope. BPMN/Event Storming of the pipeline in Camunda |
-| 3 | **Innovation of the solution** | 25 | Oleh + team | 8:00 (problem choice) + 8:30 (scope) | Highest single weight in the outcome criteria. Decided when choosing the problem and second method (TRIZ mandatory, second = your innovation lever) |
+| 3 | **Innovation of the solution** | 25 | Oleh + team | 8:00 (problem choice) + 8:30 (scope) | Highest single weight in the outcome criteria. Levers: problem choice + our two-method design (TRIZ + guided **5 Whys** with human-in-the-loop and guardrails = transparent human+AI root-cause collaboration) |
 | 4 | **Repo with working code (Day 3 artifact)** | 20 | Kuba + Denys | all day | Core deliverable. README with run instructions (required explicitly) |
 | 5 | **Deploy - working public app (Day 5 artifact)** | 20 | Denys | skeleton ~16:00, not at the end! | Left to 17:00 = classic 20-pt loss. Deploy early, iterate |
 
