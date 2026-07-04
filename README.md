@@ -1,0 +1,1 @@
+# GDG-Wroclaw-BuiltWithAI-Solution
