@@ -13,7 +13,15 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "paths": {}
+    "paths": {
+      "@gdg-wroclaw-solution/core": ["./libs/core/src/index.ts"],
+      "@gdg-wroclaw-solution/data-access": ["./libs/data-access/src/index.ts"],
+      "@gdg-wroclaw-solution/feature-wizard": [
+        "./libs/feature-wizard/src/index.ts"
+      ],
+      "@gdg-wroclaw-solution/ui": ["./libs/ui/src/index.ts"],
+      "@gdg-wroclaw-solution/shared": ["./libs/shared/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

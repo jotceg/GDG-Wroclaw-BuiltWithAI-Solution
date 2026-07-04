@@ -45,6 +45,15 @@
       "linter": "none",
       "style": "css",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:library": {
+      "linter": "none",
+      "unitTestRunner": "jest",
+      "style": "scss",
+      "standalone": true
+    },
+    "@nx/angular:component": {
+      "style": "scss"
     }
   }
 }

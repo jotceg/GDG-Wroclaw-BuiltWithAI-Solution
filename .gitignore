@@ -5,6 +5,9 @@ dist
 tmp
 out-tsc
 
+# local dev logs (from start-dev.sh)
+.dev-logs
+
 # dependencies
 node_modules
 

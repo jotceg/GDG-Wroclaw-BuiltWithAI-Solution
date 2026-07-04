@@ -1,0 +1,141 @@
+{
+  "schemes": {
+    "light": {
+      "bg":                    { "token": "--color-bg", "value": "#F5F4FB", "role": "mat-sys-surface-container-lowest", "contrast": "base surface" },
+      "surface1":              { "token": "--color-surface-1", "value": "#FFFFFF", "role": "mat-sys-surface", "contrast": "elevated surface L1" },
+      "surface2":              { "token": "--color-surface-2", "value": "#F0EEF9", "role": "mat-sys-surface-container" },
+      "surface3":              { "token": "--color-surface-3", "value": "#E7E4F4", "role": "mat-sys-surface-container-high" },
+      "onSurface":             { "token": "--color-on-surface", "value": "#17151F", "role": "mat-sys-on-surface", "contrast": "16.52:1 vs bg [AAA] · 18.05:1 vs s1 [AAA] · 15.73:1 vs s2 [AAA] · 14.44:1 vs s3 [AAA]" },
+      "onSurfaceVariant":      { "token": "--color-on-surface-variant", "value": "#4B4860", "role": "mat-sys-on-surface-variant", "contrast": "8.02:1 vs bg [AAA] · 8.77:1 vs s1 [AAA] · 7.02:1 vs s3 [AAA]" },
+      "primary":               { "token": "--color-primary", "value": "#5B3DF5", "role": "mat-sys-primary", "contrast": "5.60:1 vs bg [AA] · 6.12:1 vs s1 [AA] · 4.90:1 vs s3 [AA]" },
+      "primaryFill":           { "token": "--color-primary-fill", "value": "#5B3DF5", "role": "mat-sys-primary (fill)", "contrast": "6.12:1 vs s1 [AA]" },
+      "onPrimaryFill":         { "token": "--color-on-primary-fill", "value": "#FFFFFF", "role": "mat-sys-on-primary", "contrast": "6.12:1 vs primary [AA]" },
+      "primaryContainer":      { "token": "--color-primary-container", "value": "#E4DFFF", "role": "mat-sys-primary-container" },
+      "onPrimaryContainer":    { "token": "--color-on-primary-container", "value": "#1B0A63", "role": "mat-sys-on-primary-container", "contrast": "12.83:1 vs container [AAA]" },
+      "secondary":             { "token": "--color-secondary", "value": "#5E6B00", "role": "mat-sys-secondary", "contrast": "5.87:1 vs s1 [AA]" },
+      "secondaryContainer":    { "token": "--color-secondary-container", "value": "#E7F5A8", "role": "mat-sys-secondary-container" },
+      "onSecondaryContainer":  { "token": "--color-on-secondary-container", "value": "#2E3A00", "role": "mat-sys-on-secondary-container" },
+      "accentFill":            { "token": "--color-accent-fill", "value": "#C6EF3C", "role": "mat-sys-tertiary (signal fill)", "contrast": "pair with onAccent" },
+      "onAccent":              { "token": "--color-on-accent", "value": "#171500", "role": "mat-sys-on-tertiary", "contrast": "13.83:1 vs fill [AAA]" },
+      "method2":               { "token": "--color-method2", "value": "#5B3DF5", "role": "custom (Method-2 badge text)" },
+      "method2Dot":            { "token": "--color-method2-dot", "value": "#8B7DD8", "role": "custom (Method-2 legend, non-text)", "contrast": "3.49:1 vs s1 [3:1 OK]" },
+      "mascotAccent":          { "token": "--color-mascot-accent", "value": "#6DBE2E", "role": "custom (Volt eyes/joints — lettuce lime)", "contrast": "3.78:1 vs body #4B4860 [3:1 non-text OK] · 2.32:1 vs white (decorative on face plate)" },
+      "mascotFace":            { "token": "--color-mascot-face", "value": "#E7E4F4", "role": "custom (Volt face plate)" },
+      "sun":                   { "token": "--color-sun", "value": "#BF9600", "role": "custom (theme toggle sun icon)", "contrast": "2.54:1 vs bar (icon has aria-label; closest achievable gold)" },
+      "score1":                { "token": "--color-score-1", "value": "#C11B33", "role": "custom (score 1 · red)", "contrast": "6.05:1 vs s1 [AA]" },
+      "score2":                { "token": "--color-score-2", "value": "#B65114", "role": "custom (score 2 · orange)", "contrast": "5.03:1 vs s1 [AA]" },
+      "score3":                { "token": "--color-score-3", "value": "#4E5670", "role": "custom (score 3 · slate)", "contrast": "7.27:1 vs s1 [AAA]" },
+      "score4":                { "token": "--color-score-4", "value": "#1F7A44", "role": "custom (score 4 · green)", "contrast": "5.35:1 vs s1 [AA]" },
+      "score5":                { "token": "--color-score-5", "value": "#0A6B33", "role": "custom (score 5 · deep green)", "contrast": "6.64:1 vs s1 [AAA]" },
+      "success":               { "token": "--color-success", "value": "#0A6B33", "role": "custom/success", "contrast": "6.64:1 vs s1 [AAA]" },
+      "warning":               { "token": "--color-warning", "value": "#946200", "role": "custom/warning (amber)", "contrast": "5.24:1 vs s1 [AA]" },
+      "warningFill":           { "token": "--color-warning-fill", "value": "#FFC53D", "role": "custom/warning-container" },
+      "onWarning":             { "token": "--color-on-warning", "value": "#3A2A00", "role": "custom/on-warning", "contrast": "8.81:1 vs fill [AAA]" },
+      "error":                 { "token": "--color-error", "value": "#C11B33", "role": "mat-sys-error", "contrast": "6.05:1 vs s1 [AA]" },
+      "info":                  { "token": "--color-info", "value": "#1D5AD1", "role": "custom/info", "contrast": "6.11:1 vs s1 [AA]" },
+      "textDisabled":          { "token": "--color-text-disabled", "value": "#7A7689", "role": "mat-sys-on-surface @ disabled", "contrast": "4.39:1 vs s1 (~AA, WCAG-exempt)" },
+      "border":                { "token": "--color-border", "value": "#D6D2E6", "role": "mat-sys-outline-variant (decorative)" },
+      "borderInteractive":     { "token": "--color-border-interactive", "value": "#6E6A82", "role": "mat-sys-outline", "contrast": "5.19:1 vs s1 [3:1 OK]" },
+      "focusRing":             { "token": "--color-focus", "value": "#5B3DF5", "role": "focus indicator (3px, 2px offset)", "contrast": "6.12:1 vs s1 [≥3:1]" }
+    },
+    "dark": {
+      "bg":                    { "token": "--color-bg", "value": "#0C0B12", "role": "mat-sys-surface", "contrast": "base surface" },
+      "surface1":              { "token": "--color-surface-1", "value": "#16141F", "role": "mat-sys-surface-container-low" },
+      "surface2":              { "token": "--color-surface-2", "value": "#1E1B29", "role": "mat-sys-surface-container" },
+      "surface3":              { "token": "--color-surface-3", "value": "#282435", "role": "mat-sys-surface-container-high" },
+      "onSurface":             { "token": "--color-on-surface", "value": "#ECEAF6", "role": "mat-sys-on-surface", "contrast": "16.48:1 vs bg [AAA] · 15.31:1 vs s1 [AAA] · 12.67:1 vs s3 [AAA]" },
+      "onSurfaceVariant":      { "token": "--color-on-surface-variant", "value": "#AEA9C4", "role": "mat-sys-on-surface-variant", "contrast": "8.65:1 vs bg [AAA] · 8.03:1 vs s1 [AAA] · 6.65:1 vs s3 [AA]" },
+      "primary":               { "token": "--color-primary", "value": "#B0A2FF", "role": "mat-sys-primary (text/icon)", "contrast": "8.82:1 vs bg [AAA] · 8.20:1 vs s1 [AAA] · 6.78:1 vs s3 [AA]" },
+      "primaryFill":           { "token": "--color-primary-fill", "value": "#6D50FF", "role": "mat-sys-primary (fill)", "contrast": "pair with onPrimaryFill" },
+      "onPrimaryFill":         { "token": "--color-on-primary-fill", "value": "#FFFFFF", "role": "mat-sys-on-primary", "contrast": "4.95:1 vs fill [AA]" },
+      "primaryContainer":      { "token": "--color-primary-container", "value": "#2C2076", "role": "mat-sys-primary-container" },
+      "onPrimaryContainer":    { "token": "--color-on-primary-container", "value": "#E3DEFF", "role": "mat-sys-on-primary-container", "contrast": "10.26:1 vs container [AAA]" },
+      "secondary":             { "token": "--color-secondary", "value": "#CBE85A", "role": "mat-sys-secondary", "contrast": "14.20:1 vs bg [AAA] · 13.20:1 vs s1 [AAA]" },
+      "secondaryContainer":    { "token": "--color-secondary-container", "value": "#37411A", "role": "mat-sys-secondary-container" },
+      "onSecondaryContainer":  { "token": "--color-on-secondary-container", "value": "#E4F3A6", "role": "mat-sys-on-secondary-container" },
+      "accentFill":            { "token": "--color-accent-fill", "value": "#CBE85A", "role": "mat-sys-tertiary (signal fill)" },
+      "onAccent":              { "token": "--color-on-accent", "value": "#14140A", "role": "mat-sys-on-tertiary", "contrast": "13.43:1 vs fill [AAA]" },
+      "method2":               { "token": "--color-method2", "value": "#9A8DE0", "role": "custom (Method-2 badge text)", "contrast": "6.29:1 vs s1 [AA]" },
+      "method2Dot":            { "token": "--color-method2-dot", "value": "#6F65B8", "role": "custom (Method-2 legend, non-text)", "contrast": "3.67:1 vs s1 [3:1 OK]" },
+      "mascotAccent":          { "token": "--color-mascot-accent", "value": "#B8E86D", "role": "custom (Volt eyes/joints — bright lettuce)", "contrast": "8.20:1 vs face #3A3550 [AAA] · 12.83:1 vs s1 [AAA]" },
+      "mascotFace":            { "token": "--color-mascot-face", "value": "#3A3550", "role": "custom (Volt face plate)", "contrast": "5.14:1 vs body #AEA9C4 [3:1 OK]" },
+      "sun":                   { "token": "--color-sun", "value": "#CBE85A", "role": "custom (theme toggle moon icon — uses secondary lime)" },
+      "score1":                { "token": "--color-score-1", "value": "#FF7A8A", "role": "custom (score 1 · red)", "contrast": "7.28:1 vs s1 [AAA]" },
+      "score2":                { "token": "--color-score-2", "value": "#FFAE5A", "role": "custom (score 2 · amber)", "contrast": "9.93:1 vs s1 [AAA]" },
+      "score3":                { "token": "--color-score-3", "value": "#9EA6C6", "role": "custom (score 3 · slate)", "contrast": "7.56:1 vs s1 [AAA]" },
+      "score4":                { "token": "--color-score-4", "value": "#6EDBAA", "role": "custom (score 4 · mint)", "contrast": "10.72:1 vs s1 [AAA]" },
+      "score5":                { "token": "--color-score-5", "value": "#4BD07E", "role": "custom (score 5 · green)", "contrast": "9.21:1 vs s1 [AAA]" },
+      "success":               { "token": "--color-success", "value": "#4BD07E", "role": "custom/success", "contrast": "9.21:1 vs s1 [AAA]" },
+      "warning":               { "token": "--color-warning", "value": "#FFC53D", "role": "custom/warning (bright amber)", "contrast": "11.53:1 vs s1 [AAA]" },
+      "warningFill":           { "token": "--color-warning-fill", "value": "#FFC53D", "role": "custom/warning-container" },
+      "onWarning":             { "token": "--color-on-warning", "value": "#2B1F00", "role": "custom/on-warning", "contrast": "10.25:1 vs fill [AAA]" },
+      "error":                 { "token": "--color-error", "value": "#FF7A8A", "role": "mat-sys-error", "contrast": "7.28:1 vs s1 [AAA]" },
+      "info":                  { "token": "--color-info", "value": "#7FB0FF", "role": "custom/info", "contrast": "8.28:1 vs s1 [AAA]" },
+      "textDisabled":          { "token": "--color-text-disabled", "value": "#8B86A3", "role": "mat-sys-on-surface @ disabled", "contrast": "5.23:1 vs s1 [AA]" },
+      "border":                { "token": "--color-border", "value": "#2F2B3E", "role": "mat-sys-outline-variant (decorative)" },
+      "borderInteractive":     { "token": "--color-border-interactive", "value": "#6C6784", "role": "mat-sys-outline", "contrast": "3.39:1 vs s1 [3:1 OK]" },
+      "focusRing":             { "token": "--color-focus", "value": "#B0A2FF", "role": "focus indicator (3px, 2px offset)", "contrast": "8.82:1 vs bg [≥3:1]" }
+    }
+  },
+  "typography": {
+    "families": {
+      "display": { "token": "--font-display", "value": "'Space Grotesk', system-ui, sans-serif" },
+      "body": { "token": "--font-body", "value": "'IBM Plex Sans', system-ui, sans-serif" },
+      "mono": { "token": "--font-mono", "value": "'IBM Plex Mono', ui-monospace, monospace" }
+    },
+    "scale": {
+      "display-large": { "size": 57, "line": 64, "weight": 700, "family": "display", "role": "mat-sys-display-large" },
+      "display-small": { "size": 36, "line": 44, "weight": 700, "family": "display", "role": "mat-sys-display-small" },
+      "headline-large": { "size": 32, "line": 40, "weight": 600, "family": "display", "role": "mat-sys-headline-large" },
+      "headline-small": { "size": 24, "line": 32, "weight": 600, "family": "display", "role": "mat-sys-headline-small" },
+      "title-large": { "size": 20, "line": 28, "weight": 600, "family": "display", "role": "mat-sys-title-large" },
+      "title-medium": { "size": 16, "line": 24, "weight": 600, "family": "display", "role": "mat-sys-title-medium" },
+      "body-large": { "size": 16, "line": 26, "weight": 400, "family": "body", "role": "mat-sys-body-large" },
+      "body-medium": { "size": 14, "line": 22, "weight": 400, "family": "body", "role": "mat-sys-body-medium" },
+      "label-large": { "size": 14, "line": 20, "weight": 600, "family": "body", "role": "mat-sys-label-large" },
+      "label-medium": { "size": 12, "line": 16, "weight": 600, "family": "body", "role": "mat-sys-label-medium" },
+      "mono-data": { "size": 13, "line": 20, "weight": 500, "family": "mono", "role": "custom" },
+      "minimum": "12px"
+    }
+  },
+  "spacing": { "grid": 8, "scale": [4,8,12,16,20,24,32,40,48,56,72,96], "targets": { "minimum": 24, "primaryAction": 44 } },
+  "radii": { "chip": 999, "control": 11, "card": 16, "panel": 18, "badge": 8, "toggle": "50%" },
+  "motion": {
+    "micro": { "duration": "150-220ms", "easing": "ease-out" },
+    "stage-reveal": { "duration": "600ms", "easing": "cubic-bezier(.16,.8,.3,1)", "stagger": "50ms" },
+    "reasoning-pulse": { "duration": "1.8s", "easing": "ease-in-out", "loop": true },
+    "glow-migration": { "duration": "400ms", "easing": "ease" },
+    "theme-crossfade": { "duration": "180ms", "easing": "ease" },
+    "theme-icon-morph": { "duration": "140ms", "easing": "ease" },
+    "volt-bob": { "duration": "2.6s (1.2s hover)", "easing": "ease-in-out", "loop": true },
+    "volt-eye-track": { "range": "±0.45 SVG units (±2-3px)", "transition": "100ms", "disabled": "touch + reduced-motion" },
+    "magnetic-hover": { "range": "±5px", "factor": 0.18, "usage": "landing CTA + form submit only" },
+    "reducedMotion": "prefers-reduced-motion: reduce kills all"
+  },
+  "pipeline": {
+    "stages": ["Problem", "Parallel Analysis (TRIZ + 5 Whys)", "Merged Candidates", "Evaluation", "Selected Solution"],
+    "joinGate": "Both branches must deliver ≥3 candidates before Merged Candidates unlocks; UI shows 'Waiting for [branch] to complete…' if one finishes first, then auto-advances with the stage-reveal motion token.",
+    "methods": {
+      "triz": {
+        "mode": "automatic",
+        "subStages": [
+          { "id": 1, "label": "Formulating contradiction", "ui": "pulsing reasoning-core dot on active sub-stage" },
+          { "id": 2, "label": "Applying contradiction matrix (39×39, pytriz)", "ui": "toast on completion: 'Contradiction formulated' → sub-stage advances, previous marked ✓" },
+          { "id": 3, "label": "Instantiating principles into candidates", "ui": "live counter 'n/5 candidates'; 'TRIZ complete ✓' badge at ≥3" }
+        ],
+        "workspaceRule": "Process only in workspace — formulated contradiction, matrix output and candidate content render exclusively in the Final Report."
+      },
+      "fivewhys": {
+        "mode": "interactive",
+        "flow": "User answers up to 5 iterative why questions; AI generates each next question from the previous answer; ends early if root cause detected.",
+        "gates": {
+          "onTopic": "Off-topic/abusive answer → inline notice 'Let's stay on the problem', same why re-asked, round not consumed.",
+          "stuck": "'I'm stuck — suggest hypotheses' button → 2-3 grounded hypotheses (web search), user confirms or rejects one.",
+          "rootCause": "If root cause reached before round 5 → timeline shows 'Root cause found at step X', remaining whys disabled, branch closes as complete."
+        },
+        "editing": "v1: editing a previous answer updates it in place without regenerating later whys; toast 'Answer updated.'",
+        "postComplete": "'Generating ≥3 candidates from root cause…' progress, then '5 candidates generated ✓'."
+      }
+    }
+  }
+}
